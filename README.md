@@ -3,7 +3,7 @@
 # Práctica de Depuración - Ordenamiento en Java
 
 ### Descripción de la Práctica
-
+Nombre: Jose Avecillas 
 El objetivo de esta práctica es que los estudiantes desarrollen habilidades de depuración y corrección de errores en código Java. Se proporcionan varios métodos de ordenamiento que contienen errores intencionales. Los estudiantes deberán identificar estos errores, corregirlos y documentar los cambios realizados.
 
 Los métodos incluyen:
