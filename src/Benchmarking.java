@@ -45,5 +45,4 @@ public class Benchmarking {
         long fin = System.nanoTime();
         return  (fin-inicio)/1_000_000_000.0;
     }
-
 }
