@@ -7,28 +7,14 @@ class Benchmarking:
 
     # public Benchmarking
     def __init__(self):
-        print('Benchmarking instanciado')
-        self.mO= MetodosOrdenamiento()
-        arreglo= self.build_arreglo(10000)
-        tarea_burbuja= lambda: self.mO.sort_bubble(arreglo)
-        tarea_burbuja_mejorado= lambda: self.mO.sort_burbuja_mejorado_optimizado(arreglo)
-        tarea_seleccion= lambda: self.mO.sort_seleccion(arreglo)
+        pass
+    
+    def medir_tiempo(self, funcion, arreglo):
+        inicio= time.perf_counter()
+        funcion(arreglo)
+        fin=time.perf_counter()
+        return fin- inicio
 
-        #BURBUJA NORMAL
-        tiempo_mili_segundos= self.contar_con_current_time_milles(tarea_burbuja)
-        tiempo_nano_segundos= self.contar_con_nano_time(tarea_burbuja)
-        # print(f'Tiempo con el tiempo en milisegundo: {tiempo_mili_segundos}')
-        # print(f'Tiempo  con tiempo en nanosegundos: {tiempo_nano_segundos}')
-
-        #BURBUJA MEJORADO y SELECCION
-        tiempo_nA= self.contar_con_nano_time(tarea_burbuja_mejorado)
-        tiempo_nAs= self.contar_con_nano_time(tarea_seleccion)
-
-        print(f'Tiempo Burbuja: {tiempo_nano_segundos:.6f} segundos')
-        print(f'Tiempo Bubble Mejorado: {tiempo_nA:.6f} segundos')
-        print(f'Tiempo Selección:    {tiempo_nAs:.6f} segundos')
-
-        
     def build_arreglo(self, tamano):
         arreglo= []
         for _ in range(tamano):
@@ -48,3 +34,27 @@ class Benchmarking:
         fin= time.time_ns()
         return (fin - inicio)/1_000_000_000.0
     
+
+    #  print('Benchmarking instanciado')
+    #     self.mO= MetodosOrdenamiento()
+    #     arreglo= self.build_arreglo(10000)
+    #     tarea_burbuja= lambda: self.mO.sort_bubble(arreglo)
+    #     tarea_burbuja_mejorado= lambda: self.mO.sort_burbuja_mejorado_optimizado(arreglo)
+    #     tarea_seleccion= lambda: self.mO.sort_seleccion(arreglo)
+    #     tarea_shell= lambda: self.mO.sort_shell(arreglo)
+    #     #BURBUJA NORMAL
+    #     tiempo_mili_segundos= self.contar_con_current_time_milles(tarea_burbuja)
+    #     tiempo_nano_segundos= self.contar_con_nano_time(tarea_burbuja)
+    #     # print(f'Tiempo con el tiempo en milisegundo: {tiempo_mili_segundos}')
+    #     # print(f'Tiempo  con tiempo en nanosegundos: {tiempo_nano_segundos}')
+
+    #     #BURBUJA MEJORADO y SELECCION
+    #     tiempo_nA= self.contar_con_nano_time(tarea_burbuja_mejorado)
+    #     tiempo_nAs= self.contar_con_nano_time(tarea_seleccion)
+    #     tiempo_ss= self.contar_con_nano_time(tarea_shell)
+
+    #     print(f'Tiempo Burbuja: {tiempo_nano_segundos:.6f} segundos')
+    #     print(f'Tiempo Bubble Mejorado: {tiempo_nA:.6f} segundos')
+    #     print(f'Tiempo Selección:    {tiempo_nAs:.6f} segundos')
+    #     print(f'Tiempo Shell:    {tiempo_ss:.6f} segundos')
+        
