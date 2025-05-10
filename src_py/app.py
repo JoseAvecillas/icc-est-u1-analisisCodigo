@@ -1,4 +1,3 @@
-# Archivo principal o main 
 import benchmarking as bm
 import metodos_ordenamiento as mO
 import matplotlib.pyplot as plt
@@ -10,8 +9,12 @@ if __name__ == "__main__":
     bench = bm.Benchmarking()
     metodosO = mO.MetodosOrdenamiento()
 
-    tamanios = [5000, 10000, 10500]
+    # Tamaños exactos solicitados
+    tamanios = [5000, 10000, 30000, 50000, 100000]
     resultados = []
+
+    # Genera una sola vez el arreglo de tamaño máximo
+    arreglo_base_max = bench.build_arreglo(tamanios[-1])
 
     metodoso_dic = { 
         'metodo_burbuja': metodosO.sort_bubble, 
@@ -21,16 +24,16 @@ if __name__ == "__main__":
     }
 
     for tam in tamanios:
-        arreglo_base = bench.build_arreglo(tam)
+        sub_arreglo = arreglo_base_max[:tam]  # Subarreglo consistente con los anteriores
         for nombre, fun_metodo in metodoso_dic.items():
-            arreglo_copia = copy.deepcopy(arreglo_base)  # Asegura que todos usen el mismo arreglo original
+            arreglo_copia = copy.deepcopy(sub_arreglo)  # Copia por método
             tiempo_resuelto = bench.medir_tiempo(fun_metodo, arreglo_copia)
             resultados.append((tam, nombre, tiempo_resuelto))
 
     for tam, nombre, tiempo in resultados:
-        print(f'Tamaño: {tam}, nombre método: {nombre}, tiempo: {tiempo:.6f} segundos')
+        print(f'Tamaño: {tam}, Algoritmo: {nombre}, Tiempo: {tiempo:.6f} segundos')
 
-    # Preparar datos para graficar
+    # Graficar resultados
     tiempos_by_metodo = {
         "burbuja": [],
         "burbujaM": [],
@@ -48,17 +51,13 @@ if __name__ == "__main__":
     for tam, nombre, tiempo in resultados:
         tiempos_by_metodo[nombre_map[nombre]].append(tiempo)
 
-    # Graficar
     plt.figure(figsize=(10, 6))
-
     for nombre, tiempos in tiempos_by_metodo.items():
         plt.plot(tamanios, tiempos, label=nombre, marker="o")
 
     plt.title("Comparación de tiempo por cada método")
     plt.xlabel("Tamaño de los arreglos")
-    plt.ylabel("Tiempo de ejecución")
+    plt.ylabel("Tiempo de ejecución (segundos)")
     plt.legend()
+    plt.grid(True)
     plt.show()
-
-
-    # solucionado 
